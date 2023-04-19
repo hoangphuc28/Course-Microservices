@@ -1,0 +1,12 @@
+[submodule "User-Service"]
+	path = User-Service
+	url = https://github.com/Zhoangp/User-Service.git
+[submodule "File-Service"]
+	path = File-Service
+	url = https://github.com/Zhoangp/File-Service.git
+[submodule "Api_Gateway-Courses"]
+	path = Api_Gateway-Courses
+	url = https://github.com/Zhoangp/Api_Gateway-Courses.git
+[submodule "Auth-Service"]
+	path = Auth-Service
+	url = https://github.com/Zhoangp/Auth-Service.git
