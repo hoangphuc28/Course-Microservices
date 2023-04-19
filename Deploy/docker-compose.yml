@@ -28,7 +28,7 @@ services:
     environment:
       - ENV=app
     build:
-      context: ../API-GateWay
+      context: ../Api_Gateway-Courses
       dockerfile: Dockerfile
     container_name: apigateway
     ports:
