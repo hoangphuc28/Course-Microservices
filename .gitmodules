@@ -10,3 +10,7 @@
 [submodule "Auth-Service"]
 	path = Auth-Service
 	url = https://github.com/Zhoangp/Auth-Service.git
+
+[submodule "Course-Service"]
+	path = Course-Service
+	url = https://github.com/Zhoangp/Course-Service.git
