@@ -14,3 +14,6 @@
 [submodule "Course-Service"]
 	path = Course-Service
 	url = https://github.com/Zhoangp/Course-Service.git
+[submodule "Cart-Service"]
+	path = Cart-Service
+	url = https://github.com/Zhoangp/Cart-Service.git
