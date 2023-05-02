@@ -6,6 +6,7 @@ services:
     build:
       context: ../File-Service
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: fileservice
     ports:
       - 4000:4000
@@ -22,14 +23,15 @@ services:
       - MYSQL_DATABASE=course
     networks:
       - courses-microservices
-#   volumes:
-#     - database_mysql:/var/lib/mysql
+  #   volumes:
+  #     - database_mysql:/var/lib/mysql
   apigateway:
     environment:
       - ENV=app
     build:
       context: ../Api_Gateway-Courses
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: apigateway
     ports:
       - 3000:3000
@@ -45,6 +47,7 @@ services:
     build:
       context: ../Auth-Service
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: authservice
     ports:
       - 50051:50051
@@ -60,6 +63,7 @@ services:
     build:
       context: ../User-Service
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: userservice
     ports:
       - 50052:50052
@@ -69,6 +73,21 @@ services:
       - courses-microservices
     command: [ "/app/wait-for", "mysql-course:3306", "--", "/app/courses-user-service" ]
 
+  courseservice:
+    environment:
+      - ENV=app
+    build:
+      context: ../Course-service
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    container_name: courseservice
+    ports:
+      - 50053:50053
+    depends_on:
+      - mysql
+    networks:
+      - courses-microservices
+    command: [ "/app/wait-for", "mysql-course:3306", "--", "/app/course-service" ]
 
 volumes:
   database_mysql:

@@ -1,0 +1,91 @@
+version: "3.9"
+services:
+  fileservice:
+    environment:
+      - ENV=app
+    build:
+      context: ../File-Service
+      dockerfile: Dockerfile
+    container_name: fileservice
+    ports:
+      - 4000:4000
+    networks:
+      - courses-microservices
+
+  mysql:
+    image: mysql
+    container_name: mysql-course
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=Abc123
+      - MYSQL_DATABASE=course
+    networks:
+      - courses-microservices
+  #   volumes:
+  #     - database_mysql:/var/lib/mysql
+  apigateway:
+    environment:
+      - ENV=app
+    build:
+      context: ../Api_Gateway-Courses
+      dockerfile: Dockerfile
+    container_name: apigateway
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysql
+    networks:
+      - courses-microservices
+    command: [ "/app/wait-for", "mysql-course:3306", "--", "./api-gateway" ]
+
+  authservice:
+    environment:
+      - ENV=app
+    build:
+      context: ../Auth-Service
+      dockerfile: Dockerfile
+    container_name: authservice
+    ports:
+      - 50051:50051
+    depends_on:
+      - mysql
+    networks:
+      - courses-microservices
+    command: [ "/app/wait-for", "mysql-course:3306", "--", "/app/courses-auth-service" ]
+
+  userservice:
+    environment:
+      - ENV=app
+    build:
+      context: ../User-Service
+      dockerfile: Dockerfile
+    container_name: userservice
+    ports:
+      - 50052:50052
+    depends_on:
+      - mysql
+    networks:
+      - courses-microservices
+    command: [ "/app/wait-for", "mysql-course:3306", "--", "/app/courses-user-service" ]
+
+  courseservice:
+    environment:
+      - ENV=app
+    build:
+      context: ../Course-service
+      dockerfile: Dockerfile
+    container_name: courseservice
+    ports:
+      - 50053:50053
+    depends_on:
+      - mysql
+    networks:
+      - courses-microservices
+    command: [ "/app/wait-for", "mysql-course:3306", "--", "/app/course-service" ]
+
+volumes:
+  database_mysql:
+networks:
+  courses-microservices:
+    driver: bridge

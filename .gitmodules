@@ -17,3 +17,6 @@
 [submodule "Cart-Service"]
 	path = Cart-Service
 	url = https://github.com/Zhoangp/Cart-Service.git
+[submodule "Mail-service"]
+	path = Mail-service
+	url = https://github.com/Zhoangp/Mail-service.git
