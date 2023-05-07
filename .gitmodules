@@ -20,3 +20,6 @@
 [submodule "Mail-service"]
 	path = Mail-service
 	url = https://github.com/Zhoangp/Mail-service.git
+[submodule "Message_Broker-Course"]
+	path = Message_Broker-Course
+	url = https://github.com/Zhoangp/Message_Broker-Course.git
