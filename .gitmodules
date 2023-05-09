@@ -23,3 +23,6 @@
 [submodule "Message_Broker-Course"]
 	path = Message_Broker-Course
 	url = https://github.com/Zhoangp/Message_Broker-Course.git
+[submodule "Payment-Service"]
+	path = Payment-Service
+	url = https://github.com/Zhoangp/Payment-Service.git
